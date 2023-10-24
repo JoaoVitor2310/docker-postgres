@@ -1,0 +1,13 @@
+version: "3"
+services: 
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password123
+      POSTGRES_USER: user123
+      POSTGRES_DB: db123
+  app:
+    image: my-node-app
+    ports:
+      - 13000:3000 # App is using port 3000 inside the container, but we will access the port 13000 outside, thats why test.rest is using 13000
+      
