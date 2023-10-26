@@ -11,4 +11,4 @@ COPY . .
 # Exposes the port of the container to access from outside(local machine)
 EXPOSE 3000
 # Specifies the command to run when the Docker container is started from the image
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

@@ -1,12 +1,30 @@
+# Teste no container
 ###
 GET http://localhost:13000/setup
+
 ###
-GET http://localhost:13000
+GET http://localhost:13000/all
+
+###
+GET http://localhost:13000/4
+
 ###
 POST http://localhost:13000
 Content-Type: application/json
 
 {
-    "name": "joao vitor",
-    "location": "Rua: 123, número: 11, bairro: Centro"
+    "name": "Escola ABC",
+    "address": "Rua: 123, número: 11, bairro: Centro"
 }
+
+###
+PATCH  http://localhost:13000/4
+Content-Type: application/json
+
+{
+    "name": "Escola EFG",
+    "address": "Rua: 456, número: 33, bairro: Parque Tamandaré"
+}
+
+###
+DELETE http://localhost:13000/1
