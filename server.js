@@ -6,16 +6,16 @@ const app = express();
 app.use(express.json());
 
 
-
-app.get('/setup', async (req,res) => { // Creates the table and its collumns
+app.get('/setup', async (req,res) => { // Creates tables and its columns
     try {
-        const existTable = await pool.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'schools')");
-        if(existTable.rows[0].exists){ // If table already exists
-            res.status(405).send({message: "Table already exists"});
-            return;
-        }
+        // const existTable = await pool.query("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'schools')");
+        // if(existTable.rows[0].exists){ // If table already exists
+        //     res.status(405).send({message: "Table already exists"});
+        //     return;
+        // }
 
-        await pool.query('CREATE TABLE schools(id SERIAL PRIMARY KEY, name VARCHAR(100), address VARCHAR(100) )')
+        await pool.query('CREATE TABLE IF NOT EXISTS schools(id SERIAL PRIMARY KEY, name VARCHAR(100), address VARCHAR(100))');
+        await pool.query('CREATE TABLE students(id SERIAL PRIMARY KEY, name VARCHAR(100), age INTEGER, parents_names VARCHAR(200), address VARCHAR(100), school_id INTEGER REFERENCES schools(id))');
         res.status(200).send({message: "Successfully created table"})
     } catch (error) {
         console.log(error);
